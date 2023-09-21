@@ -1,4 +1,3 @@
-// TODO change this to your own package instead of jehrensb ***
 package ch.heig.dai.lab.fileio.ansermgw;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
