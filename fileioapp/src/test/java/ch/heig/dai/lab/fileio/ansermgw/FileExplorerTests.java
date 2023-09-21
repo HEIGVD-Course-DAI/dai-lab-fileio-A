@@ -10,7 +10,6 @@ import java.util.Set;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import ch.heig.dai.lab.fileio.jehrensb.FileExplorer;
 
 public class FileExplorerTests {
 

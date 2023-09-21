@@ -9,8 +9,6 @@ import java.nio.charset.StandardCharsets;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import ch.heig.dai.lab.fileio.jehrensb.EncodingSelector;
-
 public class EncodingSelectorTest {
 
     private final EncodingSelector selector = new EncodingSelector();
