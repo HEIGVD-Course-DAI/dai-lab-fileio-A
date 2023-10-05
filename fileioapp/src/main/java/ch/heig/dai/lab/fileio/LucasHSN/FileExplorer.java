@@ -25,14 +25,12 @@ public class FileExplorer {
      * @return a new file, or null if there is no new file
      */
     public File getNewFile() {
-        File[] filesInFolder = folder.listFiles();
-
-        if (filesInFolder != null) {
-            for (File file : filesInFolder) {
-                // Check if the file not in the knownFiles HashSet
+        File[] files = folder.listFiles();
+        if (files != null) {
+            for (File file : files) {
                 if (!knownFiles.contains(file)) {
                     knownFiles.add(file);
-                    return file; // Return the new file
+                    return file;
                 }
             }
         }
