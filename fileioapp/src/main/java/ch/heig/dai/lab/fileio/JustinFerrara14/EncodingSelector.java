@@ -17,6 +17,8 @@ public class EncodingSelector {
      * @return the encoding of the file, or null if the extension is not recognized
      */
     public Charset getEncoding(File file) {
+        if(!file.exists()) return null;
+
         String filename = file.getName();
 
         if (filename.endsWith(".utf8")) {
