@@ -5,6 +5,7 @@ import java.nio.charset.Charset;
 
 public class EncodingSelector {
 
+    
     /**
      * Get the encoding of a file based on its extension.
      * The following extensions are recognized:
