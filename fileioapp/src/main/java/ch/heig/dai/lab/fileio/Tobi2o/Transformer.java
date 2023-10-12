@@ -41,40 +41,43 @@ public class Transformer {
         return result.toString().trim();
     }
 
-    /**
-     * Wrap the text so that there are at most numWordsPerLine words per line.
-     * Number the lines starting at 1.
-     * @param source the string to transform
-     * @return the transformed string
-     */
-    public String wrapAndNumberLines(String source) {
+/**
+ * Wrap the text so that there are at most numWordsPerLine words per line.
+ * Number the lines starting at 1.
+ * @param source the string to transform
+ * @return the transformed string
+ */
+public String wrapAndNumberLines(String source) {
 
-        StringBuilder res = new StringBuilder();
-        String[] words = source.split("\s+");
+    StringBuilder result = new StringBuilder();
+    String[] words = source.split("\\s+");
+    int currentWordCount = 0;
+    int currentLineNumber = 1;
 
-        int wordCount  = 0;
-        int lineNUmber = 1;
+    result.append(currentLineNumber).append(". ");
 
-        res.append("1. ");
+    for (int i = 0; i < words.length; i++) {
+        String word = words[i];
+        result.append(word);
 
-        for(String word : words) {
-            res.append(word);
-            wordCount++;
+        currentWordCount++;
 
-            if(wordCount >= numWordsPerLine){
-                res.append("\n").append(++lineNUmber).append(". ");
-                wordCount = 0;
-            }else {
-                if(word != words[words.length-1])
-                    res.append(" ");
-                else
-                    res.append("\n");
+        boolean isLastWord = (i == words.length - 1);
+        boolean shouldWrap = (currentWordCount >= numWordsPerLine);
+
+        if (shouldWrap || isLastWord) {
+            if (!isLastWord) {
+                result.append("\n");
+                result.append(++currentLineNumber).append(". ");
+                currentWordCount = 0;
+            } else {
+                result.append("\n");
             }
-
+        } else {
+            result.append(" ");
         }
-        return res.toString();
     }
-    
-    
+    return result.toString();
+}
     
 }
