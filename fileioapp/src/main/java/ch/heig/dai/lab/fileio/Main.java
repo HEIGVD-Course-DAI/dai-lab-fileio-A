@@ -31,7 +31,6 @@ public class Main {
         String folder = args[0];
         int wordsPerLine = Integer.parseInt(args[1]);
         System.out.println("Application started, reading folder " + folder + "...");
-        // TODO: implement the main method here
 
         FileExplorer fileExplorer = new FileExplorer(folder);
         EncodingSelector encodingSelector = new EncodingSelector();
