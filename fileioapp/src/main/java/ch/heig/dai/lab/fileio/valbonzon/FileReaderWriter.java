@@ -2,6 +2,7 @@ package ch.heig.dai.lab.fileio.valbonzon;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 public class FileReaderWriter {
 
@@ -15,7 +16,22 @@ public class FileReaderWriter {
         // TODO: Implement the method body here. 
         // Use the ...Stream and ...Reader classes from the java.io package.
         // Make sure to close the streams and readers at the end.
-        return null;
+
+        try (var reader = new BufferedReader(new InputStreamReader(new FileInputStream(file.getAbsolutePath()), encoding))){
+
+            String content = new String();
+            String line;
+            while((line = reader.readLine()) != null){
+                content += line + "\n";
+            }
+            return content;
+
+        } catch (Exception e) {
+            return null;
+        }
+
+
+        
     }
 
     /**
@@ -29,6 +45,21 @@ public class FileReaderWriter {
         // TODO: Implement the method body here. 
         // Use the ...Stream and ...Reader classes from the java.io package.
         // Make sure to flush the data and close the streams and readers at the end.
-        return false;
+        
+
+        try (var writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file.getAbsolutePath()),encoding));){
+            
+            try {
+                writer.write(content);
+            } catch (Exception e) {
+                return false;
+            }
+            return true;
+
+        } catch (Exception e) {
+            return false;
+        }
+
+        
     }
 }

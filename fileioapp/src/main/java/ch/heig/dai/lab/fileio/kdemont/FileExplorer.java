@@ -2,6 +2,7 @@ package ch.heig.dai.lab.fileio.kdemont;
 
 import java.io.File;
 import java.util.HashSet;
+import java.util.Objects;
 
 public class FileExplorer {
     private final File folder;
@@ -25,7 +26,17 @@ public class FileExplorer {
      * @return a new file, or null if there is no new file
      */
     public File getNewFile() {
-        // TODO: implement the method body here
+        File[] files = folder.listFiles();
+
+        assert files != null;
+
+        // find the first file in folder that is not in known files
+        for (File file : files) {
+            if (!knownFiles.contains(file)) {
+                knownFiles.add(file);
+                return file;
+            }
+        }
         return null;
     }
 }

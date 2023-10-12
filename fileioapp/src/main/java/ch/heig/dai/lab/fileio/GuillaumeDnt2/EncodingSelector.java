@@ -2,6 +2,8 @@ package ch.heig.dai.lab.fileio.GuillaumeDnt2;
 
 import java.io.File;
 import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
+import java.nio.charset.StandardCharsets;
 
 public class EncodingSelector {
 
@@ -17,7 +19,21 @@ public class EncodingSelector {
      * @return the encoding of the file, or null if the extension is not recognized
      */
     public Charset getEncoding(File file) {
-        // TODO: implement the method body here
-        return null;
+        //Get the extension of the file
+        String extension = file.getName().substring(file.getName().lastIndexOf('.') + 1);
+
+        //Return the right encoding depanding on the extension
+        switch(extension){ 
+            case "utf8":
+                return StandardCharsets.UTF_8;
+            case "utf16le":
+                return StandardCharsets.UTF_16LE;
+            case "utf16be":
+                return StandardCharsets.UTF_16BE;
+            case "txt":
+                return StandardCharsets.US_ASCII;
+            default:
+                return null;
+        }
     }
 }

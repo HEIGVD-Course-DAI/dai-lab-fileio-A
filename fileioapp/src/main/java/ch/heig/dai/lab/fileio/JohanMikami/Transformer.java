@@ -1,9 +1,15 @@
 package ch.heig.dai.lab.fileio.JohanMikami;
 
+import java.io.File;
+import java.nio.charset.Charset;
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Transformer {
 
     private final String newName;
     private final int numWordsPerLine;
+
 
     /**
      * Constructor
@@ -24,7 +30,11 @@ public class Transformer {
      */
     public String replaceChuck(String source) {
         // TODO: Implement the method body here.
-        return "";
+        try {
+            return source.replace("Chuck Norris", newName);
+        }catch (Exception e) {
+            return "";
+        }
     }
 
     /**
@@ -34,7 +44,17 @@ public class Transformer {
      */
     public String capitalizeWords(String source) {
         // TODO: Implement the method body here.
-        return "";
+        try {
+            StringBuilder strbuild = new StringBuilder();
+            String[] splitSources = source.split(" ");
+            for (String str:splitSources) {
+                if (!Objects.equals(str, splitSources[0]))strbuild.append(" ");
+                strbuild.append(str.substring(0, 1).toUpperCase()).append(str.substring(1));
+            }
+            return strbuild.toString();
+        }catch (Exception e) {
+            return "";
+        }
     }
 
     /**
@@ -46,6 +66,18 @@ public class Transformer {
     public String wrapAndNumberLines(String source) {
         // TODO: Implement the method body here.
         // Use the StringBuilder class to build the result string.
-        return "";
+        try {
+            StringBuilder str = new StringBuilder("1.");
+            String[] splitSources = source.split(" ");
+            for (int i = 1, j = 1; i <= splitSources.length; i++) {
+                str.append(" ").append(splitSources[i-1]);
+                if (i%numWordsPerLine==0) {
+                    str.append("\n").append(++j).append(".");
+                }
+            }
+            return str.append("\n").toString();
+        }catch (Exception e){
+            return "";
+        }
     }
 }   

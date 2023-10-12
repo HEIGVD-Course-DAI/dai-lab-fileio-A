@@ -23,8 +23,8 @@ public class Transformer {
      * @return the transformed string
      */
     public String replaceChuck(String source) {
-        // TODO: Implement the method body here.
-        return "";
+        String transformedString = source.replace("Chuck Norris", newName);
+        return transformedString;
     }
 
     /**
@@ -33,8 +33,19 @@ public class Transformer {
      * @return the transformed string
      */
     public String capitalizeWords(String source) {
-        // TODO: Implement the method body here.
-        return "";
+        String[] words = source.split(" ");
+        String transformedString = new String();
+        for(String word : words){
+            String firstletter = word.substring(0, 1);
+            String remainingLetters = word.substring(1, word.length());
+            firstletter = firstletter.toUpperCase();
+            word = firstletter + remainingLetters;
+            transformedString = String.join(" ", transformedString, word);
+
+        }
+        transformedString = transformedString.substring(1, transformedString.length());
+        
+        return transformedString;
     }
 
     /**
@@ -44,8 +55,28 @@ public class Transformer {
      * @return the transformed string
      */
     public String wrapAndNumberLines(String source) {
-        // TODO: Implement the method body here.
-        // Use the StringBuilder class to build the result string.
-        return "";
+        
+        
+        String[] words = source.split(" ");
+
+        StringBuilder transformedString = new StringBuilder();
+        int numLine = 1;
+        for(int n = 0; n < words.length;n += numWordsPerLine){
+
+            transformedString.append(numLine + ". ");
+            for(int m = 0; m < numWordsPerLine; m++){
+                
+                if(n+m < words.length){
+                    if(m != 0)
+                        transformedString.append(" ");  
+                    transformedString.append(words[n+m]);
+                }
+                
+            }
+           
+            transformedString.append("\n");
+            numLine++;
+        }
+        return transformedString.toString();
     }
 }   

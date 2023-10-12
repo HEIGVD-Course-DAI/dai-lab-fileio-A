@@ -1,5 +1,7 @@
 package ch.heig.dai.lab.fileio.borishuu;
 
+import java.io.IOException;
+
 public class Transformer {
 
     private final String newName;
@@ -23,8 +25,7 @@ public class Transformer {
      * @return the transformed string
      */
     public String replaceChuck(String source) {
-        // TODO: Implement the method body here.
-        return "";
+        return source.replaceAll("Chuck Norris", newName);
     }
 
     /**
@@ -33,8 +34,15 @@ public class Transformer {
      * @return the transformed string
      */
     public String capitalizeWords(String source) {
-        // TODO: Implement the method body here.
-        return "";
+        String[] words = source.split(" ");
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (String word : words) {
+            stringBuilder.append(word.substring(0, 1).toUpperCase());
+            stringBuilder.append(word.substring(1));
+            stringBuilder.append(" "); 
+        }
+        return stringBuilder.toString().trim();
     }
 
     /**
@@ -44,8 +52,23 @@ public class Transformer {
      * @return the transformed string
      */
     public String wrapAndNumberLines(String source) {
-        // TODO: Implement the method body here.
-        // Use the StringBuilder class to build the result string.
-        return "";
+        String[] words = source.split(" ");
+        StringBuilder stringBuilder = new StringBuilder();
+
+        int numWords = 0;
+        int line = 1;
+
+        for (String word : words) {
+            if (numWords % numWordsPerLine == 0) {
+                if (numWords != 0) {
+                    stringBuilder.append("\n");
+                }
+                stringBuilder.append(line + "."); 
+                line++;                          
+            }
+            stringBuilder.append(" " + word);
+            numWords++;
+        }
+        return stringBuilder.append('\n').toString();
     }
 }   

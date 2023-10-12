@@ -23,8 +23,9 @@ public class Transformer {
      * @return the transformed string
      */
     public String replaceChuck(String source) {
-        // TODO: Implement the method body here.
-        return "";
+
+        String chuck = "Chuck Norris";
+        return source.replace(chuck, newName);
     }
 
     /**
@@ -33,8 +34,19 @@ public class Transformer {
      * @return the transformed string
      */
     public String capitalizeWords(String source) {
-        // TODO: Implement the method body here.
-        return "";
+
+        StringBuilder newStr = new StringBuilder();
+        for(int i = 0; i < source.length();++i){
+
+            if (((i == 0) || source.charAt(i-1) == ' ')){
+                newStr.append(Character.toString(Character.toUpperCase(source.charAt(i))));
+                continue;
+            }
+
+            newStr.append(source.charAt(i));
+        }
+
+        return newStr.toString();
     }
 
     /**
@@ -44,8 +56,37 @@ public class Transformer {
      * @return the transformed string
      */
     public String wrapAndNumberLines(String source) {
-        // TODO: Implement the method body here.
-        // Use the StringBuilder class to build the result string.
-        return "";
+
+        StringBuilder newStr = new StringBuilder();
+        int count = 0;
+        int line = 1;
+        boolean isNewLine = true;
+
+        for(int i = 0; i < source.length();++i){
+
+            if (i == source.length() - 1 || (source.charAt(i+1) == ' ') && source.charAt(i) != ' '){
+                ++count;
+            }
+
+            if (isNewLine){
+                newStr.append(line);
+                newStr.append('.');
+                if(line == 1) newStr.append(' ');
+                isNewLine = false;
+            }
+
+            newStr.append(source.charAt(i));
+
+            if(count == numWordsPerLine){
+                newStr.append("\n");
+                count = 0;
+                ++line;
+                isNewLine = true;
+            }
+
+        }
+        newStr.append("\n");
+
+        return newStr.toString();
     }
 }   

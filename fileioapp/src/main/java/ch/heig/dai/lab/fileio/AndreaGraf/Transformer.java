@@ -23,8 +23,7 @@ public class Transformer {
      * @return the transformed string
      */
     public String replaceChuck(String source) {
-        // TODO: Implement the method body here.
-        return "";
+        return source.replace("Chuck Norris", newName);
     }
 
     /**
@@ -33,8 +32,20 @@ public class Transformer {
      * @return the transformed string
      */
     public String capitalizeWords(String source) {
-        // TODO: Implement the method body here.
-        return "";
+
+        String[] words = source.split("\\s+");
+        StringBuilder result = new StringBuilder();
+
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                result.append(word.substring(0, 1).toUpperCase());
+                result.append(word.substring(1));
+                result.append(" ");
+            }
+        }
+
+        // Remove the trailing space and return the result
+        return result.toString().trim();
     }
 
     /**
@@ -44,8 +55,29 @@ public class Transformer {
      * @return the transformed string
      */
     public String wrapAndNumberLines(String source) {
-        // TODO: Implement the method body here.
-        // Use the StringBuilder class to build the result string.
-        return "";
+
+        String[] words = source.split("\\s+");
+        StringBuilder result = new StringBuilder();
+        int wordsInCurrentLine = 0;
+
+        for (String word : words) {
+            if (wordsInCurrentLine >= numWordsPerLine) {
+                result.append("\n");
+                wordsInCurrentLine = 0;
+            }
+            result.append(word).append(" ");
+            wordsInCurrentLine++;
+        }
+
+        // Append line numbers at the beginning of each line
+        String[] lines = result.toString().split("\n");
+        result.setLength(0); // Clear the StringBuilder
+        int lineCounter = 1;
+        for (String line : lines) {
+            line = line.substring(0, line.length() - 1);
+            result.append(lineCounter).append(". ").append(line).append("\n");
+            lineCounter++;
+        }
+        return result.toString();
     }
 }   

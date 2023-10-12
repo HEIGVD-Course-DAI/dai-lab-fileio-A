@@ -2,6 +2,7 @@ package ch.heig.dai.lab.fileio.GLK;
 
 import java.io.File;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 public class EncodingSelector {
 
@@ -18,6 +19,37 @@ public class EncodingSelector {
      */
     public Charset getEncoding(File file) {
         // TODO: implement the method body here
-        return null;
+        int point = file.getName().lastIndexOf(('.'));
+        if(point == -1 || file == null) {
+            return null;
+        }
+        String endOfFile =  file.getName().substring(point);
+        Charset charset;
+
+
+        switch(endOfFile) {
+            case ".txt" :
+                charset = StandardCharsets.US_ASCII;
+                break;
+
+            case ".utf8" :
+                charset = StandardCharsets.UTF_8;
+                break;
+
+            case ".utf16be" :
+                charset = StandardCharsets.UTF_16BE;
+                break;
+
+            case ".utf16le" :
+                charset = StandardCharsets.UTF_16LE;
+                break;
+
+            default :
+                System.out.println("cannot find encoding format");
+                return null;
+            }
+        return charset;
+        }
+
     }
-}
+

@@ -2,7 +2,7 @@ package ch.heig.dai.lab.fileio.Tasticoco;
 
 import java.io.File;
 import java.util.HashSet;
-
+//  #290
 public class FileExplorer {
     private final File folder;
     private HashSet<File> knownFiles;
@@ -25,7 +25,17 @@ public class FileExplorer {
      * @return a new file, or null if there is no new file
      */
     public File getNewFile() {
-        // TODO: implement the method body here
+        File[] allFilesInFolder = this.folder.listFiles();
+
+        if(allFilesInFolder != null) {
+            for(File fileTested : allFilesInFolder) {
+                if(!this.knownFiles.contains(fileTested)){
+                    this.knownFiles.add(fileTested);
+                    return fileTested;
+                }
+            }
+        }
+
         return null;
     }
 }
