@@ -20,7 +20,7 @@ public class TransformerTest {
     }
 
     @Test
-    //@Disabled
+    //@Disabled 
     public void noReplaceChuckTest() {
         String testString = "Ce texte ne contient pas le nom de Chuck N.";
         assertEquals(testString, transformer.replaceChuck(testString));
