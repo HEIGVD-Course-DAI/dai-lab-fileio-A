@@ -62,7 +62,7 @@ public class Transformer {
 
         wrapped.append(lineCount).append(". ");
 
-        for (String word : words) { 
+        for (String word : words) {
             ++wordTotal;
             if (wordCount < numWordsPerLine) {
                 wrapped.append(word);

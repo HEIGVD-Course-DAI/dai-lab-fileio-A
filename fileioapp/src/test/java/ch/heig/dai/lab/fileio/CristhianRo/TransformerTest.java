@@ -27,7 +27,7 @@ public class TransformerTest {
     }
 
     @Test
-    //@Disabled
+    //@Disabled 
     public void capitalizeWordsTest() {
         String expected = "Chuck Norris S’est Fait Flasher À 280km/h Sur L’autoroute. A Pied.";
         assertEquals(expected, transformer.capitalizeWords(testString));
