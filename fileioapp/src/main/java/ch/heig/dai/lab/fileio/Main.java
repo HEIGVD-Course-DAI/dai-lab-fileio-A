@@ -1,6 +1,8 @@
 package ch.heig.dai.lab.fileio;
 
 import java.io.File;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 // *** TODO: Change this to import your own package ***
 import ch.heig.dai.lab.fileio.jehrensb.*;
@@ -32,11 +34,21 @@ public class Main {
         int wordsPerLine = Integer.parseInt(args[1]);
         System.out.println("Application started, reading folder " + folder + "...");
         // TODO: implement the main method here
+        FileExplorer fileExp = new FileExplorer(folder);
+        EncodingSelector selector = new EncodingSelector();
+        FileReaderWriter fileReadWrite = new FileReaderWriter();
+        Transformer transformer = new Transformer(newName, wordsPerLine);
 
         while (true) {
             try {
                 // TODO: loop over all files
-
+                File file = fileExp.getNewFile();
+                Charset encoding = selector.getEncoding(file);
+                String content = fileReadWrite.readFile(file, encoding);
+                content = transformer.replaceChuck(content);
+                content = transformer.capitalizeWords(content);
+                content = transformer.wrapAndNumberLines(content);
+                fileReadWrite.writeFile(new File(file.getName()+".processed"), content, StandardCharsets.UTF_8);
             } catch (Exception e) {
                 System.out.println("Exception: " + e);
             }
