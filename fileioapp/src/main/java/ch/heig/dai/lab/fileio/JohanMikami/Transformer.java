@@ -75,7 +75,8 @@ public class Transformer {
                     str.append("\n").append(++j).append(".");
                 }
             }
-            return str.append("\n").toString();
+            //str.append("\n");
+            return str.toString();
         }catch (Exception e){
             return "";
         }
