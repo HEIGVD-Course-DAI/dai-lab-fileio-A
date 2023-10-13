@@ -1,13 +1,13 @@
 package ch.heig.dai.lab.fileio;
 
 import java.io.File;
+import java.nio.charset.Charset;
 
-// *** TODO: Change this to import your own package ***
-import ch.heig.dai.lab.fileio.jehrensb.*;
+import ch.heig.dai.lab.fileio.Neroil.FileExplorer;
+import ch.heig.dai.lab.fileio.Neroil.*;
 
 public class Main {
-    // *** TODO: Change this to your own name ***
-    private static final String newName = "Jean-Claude Van Damme";
+    private static final String newName = "Edwin Haffner";
 
     /**
      * Main method to transform files in a folder.
@@ -31,11 +31,32 @@ public class Main {
         String folder = args[0];
         int wordsPerLine = Integer.parseInt(args[1]);
         System.out.println("Application started, reading folder " + folder + "...");
-        // TODO: implement the main method here
+
+
+        FileExplorer fileExplorer           = new FileExplorer(folder);
+        EncodingSelector encodingSelector   = new EncodingSelector();
+        FileReaderWriter fileReaderWriter   = new FileReaderWriter();
+        Transformer transformer             = new Transformer(newName,wordsPerLine);
 
         while (true) {
             try {
-                // TODO: loop over all files
+
+                File file           = fileExplorer.getNewFile();
+                if (file == null) break;
+                Charset encoding    = encodingSelector.getEncoding(file);
+
+                if(encoding == null) continue;
+
+                String fileString       = fileReaderWriter.readFile(file,encoding);
+
+                //Use the three transform functions
+                String newFileString    = transformer.replaceChuck(fileString);
+                newFileString           = transformer.capitalizeWords(newFileString);
+                newFileString           = transformer.wrapAndNumberLines(newFileString);
+
+                File newFile = new File(file.getPath()+".processed");
+                fileReaderWriter.writeFile(newFile,newFileString,Charset.forName("UTF-8"));
+
 
             } catch (Exception e) {
                 System.out.println("Exception: " + e);
