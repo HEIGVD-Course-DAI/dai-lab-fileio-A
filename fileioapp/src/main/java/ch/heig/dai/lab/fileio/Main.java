@@ -45,6 +45,7 @@ public class Main {
                 if(encoding==null)continue;
 
                 String content = fileReadWrite.readFile(inputFile, encoding);
+                if(content==null)continue;
 
                 content = transformer.replaceChuck(content);
                 content = transformer.capitalizeWords(content);

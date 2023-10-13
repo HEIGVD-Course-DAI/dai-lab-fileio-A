@@ -95,7 +95,7 @@ public class Transformer {
             builder.append(" " + words[i]);
 
         }
-        builder.append('\n');
+        //builder.append('\n');
         return builder.toString();
     }
 }
