@@ -21,7 +21,7 @@ public class FileReaderWriter {
             String line;
 
             while ((line = bufferedReader.readLine()) != null) {
-                fileContent.append(line).append("\r\n");
+                fileContent.append(line).append("\n");
             }
 
             reader.close();
