@@ -1,5 +1,7 @@
 package ch.heig.dai.lab.fileio.AdrianRogner;
 
+import java.util.regex.Pattern;
+
 public class Transformer {
 
     private final String newName;
@@ -24,7 +26,7 @@ public class Transformer {
      */
     public String replaceChuck(String source) {
         // TODO: Implement the method body here.
-        return "";
+        return source.replaceAll("Chuck Norris", newName);
     }
 
     /**
@@ -34,7 +36,15 @@ public class Transformer {
      */
     public String capitalizeWords(String source) {
         // TODO: Implement the method body here.
-        return "";
+        String[] str = source.split(" ");
+        String capitalized = "";
+        for(String w:str){
+            String first = w.substring(0,1);
+            String other = w.substring(1);
+            capitalized += first.toUpperCase() + other + " ";
+        }
+        String result = capitalized.substring(0, capitalized.length() - 1);
+        return result;
     }
 
     /**
@@ -46,6 +56,21 @@ public class Transformer {
     public String wrapAndNumberLines(String source) {
         // TODO: Implement the method body here.
         // Use the StringBuilder class to build the result string.
-        return "";
+        StringBuilder stringBuilder = new StringBuilder();
+        String[]str = source.split(" ");
+        int j = 1;
+        for(int i = 0; i < str.length; ++i){
+            if(i % numWordsPerLine == 0){
+                if(i == 0) {
+                    stringBuilder.append(j++ + ". " + str[i]);
+                } else {
+                    stringBuilder.append("\n" + j++ + ". " + str[i]);
+                }
+            } else {
+                stringBuilder.append(" " + str[i]);
+            }
+        }
+        stringBuilder.append("\n");
+        return stringBuilder.toString();
     }
 }   

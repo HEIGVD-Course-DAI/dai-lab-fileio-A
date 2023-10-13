@@ -2,6 +2,9 @@ package ch.heig.dai.lab.fileio.AlejandroSta;
 
 import java.io.File;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.List;
 
 public class EncodingSelector {
 
@@ -18,6 +21,14 @@ public class EncodingSelector {
      */
     public Charset getEncoding(File file) {
         // TODO: implement the method body here
-        return null;
+        List<String> extensions = Arrays.asList("utf8", "txt", "utf16be", "utf16le");
+        Charset[] encoders = {StandardCharsets.UTF_8, StandardCharsets.US_ASCII, StandardCharsets.UTF_16BE, StandardCharsets.UTF_16LE};
+        String[] split = file.getName().split("\\.");
+        int index = extensions.indexOf(split[split.length - 1]);
+        if(index == -1){
+            return null;
+        }else{
+            return encoders[index];
+        }
     }
 }

@@ -12,14 +12,13 @@ public class FileReaderWriter {
      * @return the content of the file as a String, or null if an error occurred.
      */
     public String readFile(File file, Charset encoding) {
-        // TODO: Implement the method body here. 
         // Use the ...Stream and ...Reader classes from the java.io package.
         // Make sure to close the streams and readers at the end.
-        try(Reader reader = new FileReader(file.getName(), encoding)){
-            var c = -1;
+        try(Reader reader = new FileReader(file.getAbsolutePath(), encoding)){
+            int c = -1;
             StringBuilder str = new StringBuilder();
             while ((c = reader.read()) != -1) {
-                str.append(c);
+                str.append((char)c);
             }
             if (str.isEmpty())
                 return null;
@@ -37,11 +36,10 @@ public class FileReaderWriter {
      * @return true if the file was written successfully, false otherwise
      */
     public boolean writeFile(File file, String content, Charset encoding) {
-        // TODO: Implement the method body here. 
         // Use the ...Stream and ...Reader classes from the java.io package.
         // Make sure to flush the data and close the streams and readers at the end.
-        try(Writer writer = new FileWriter(file.getName(), encoding)){
-            writer.write(content);
+        try(Writer writer = new FileWriter(file.getAbsolutePath(), encoding)){
+            writer.write(content, 0, content.length());
             writer.flush();
             return true;
         }catch(IOException e){
