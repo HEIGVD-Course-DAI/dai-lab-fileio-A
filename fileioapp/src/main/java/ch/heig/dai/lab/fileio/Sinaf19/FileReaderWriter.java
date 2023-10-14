@@ -24,8 +24,9 @@ public class FileReaderWriter {
                             encoding)
             );
 
-            while (reader.readLine() != null) {
-                content.append(reader.readLine()).append('\n');
+            String line;
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append('\n');
             }
 
             reader.close();

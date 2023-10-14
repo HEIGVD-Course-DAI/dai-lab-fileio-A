@@ -22,17 +22,17 @@ public class EncodingSelector {
         String fileName = file.getName();
         String extension = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
 
-        switch (extension) {
-            case "utf8":
-                return StandardCharsets.UTF_8;
-            case "txt":
-                return StandardCharsets.US_ASCII;
-            case "utf16be":
-                return StandardCharsets.UTF_16BE;
-            case "utf16le":
-                return StandardCharsets.UTF_16LE;
-            default:
-                return null;
-        }
+        return switch (extension) {
+            case "utf8" ->
+                 StandardCharsets.UTF_8;
+            case "txt" ->
+                 StandardCharsets.US_ASCII;
+            case "utf16be" ->
+                 StandardCharsets.UTF_16BE;
+            case "utf16le" ->
+                 StandardCharsets.UTF_16LE;
+            default ->
+                 null;
+        };
     }
 }
