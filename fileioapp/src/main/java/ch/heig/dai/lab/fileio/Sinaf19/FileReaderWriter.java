@@ -29,17 +29,12 @@ public class FileReaderWriter {
             }
 
             reader.close();
-
+            return content.toString();
         } catch (IOException e) {
             System.out.println("Exception: " + e);
             return null;
         }
 
-        if (content.isEmpty()) {
-            return null;
-        } else {
-            return content.toString();
-        }
     }
 
     /**
@@ -65,12 +60,12 @@ public class FileReaderWriter {
 
             writer.flush();
             writer.close();
-
+            return true;
         } catch (IOException e) {
             System.out.println("Exception: " + e);
             return false;
         }
 
-        return true;
+
     }
 }
