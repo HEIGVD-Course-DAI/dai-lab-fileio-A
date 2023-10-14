@@ -26,7 +26,7 @@ public class FileReaderWriter {
 
             String line;
             while ((line = reader.readLine()) != null) {
-                content.append(line).append('\n');
+                content.append(line);
             }
 
             reader.close();
