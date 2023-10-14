@@ -1,13 +1,21 @@
 package ch.heig.dai.lab.fileio;
 
 import java.io.File;
+import java.nio.charset.Charset;
 
 // *** TODO: Change this to import your own package ***
-import ch.heig.dai.lab.fileio.jehrensb.*;
+import ch.heig.dai.lab.fileio.EwanHeig.FileExplorer;
+import ch.heig.dai.lab.fileio.EwanHeig.FileReaderWriter;
+import ch.heig.dai.lab.fileio.EwanHeig.EncodingSelector;
+import ch.heig.dai.lab.fileio.EwanHeig.Transformer;
+
+
+
+
 
 public class Main {
     // *** TODO: Change this to your own name ***
-    private static final String newName = "Jean-Claude Van Damme";
+    private static final String newName = "Ewan Bloechle";
 
     /**
      * Main method to transform files in a folder.
@@ -33,9 +41,34 @@ public class Main {
         System.out.println("Application started, reading folder " + folder + "...");
         // TODO: implement the main method here
 
+        FileExplorer fileExplorer = new FileExplorer(folder);
+        FileReaderWriter fileReaderWriter = new FileReaderWriter();
+        EncodingSelector encodingSelector = new EncodingSelector();
+        Transformer transformer = new Transformer(newName,wordsPerLine);
+
         while (true) {
             try {
                 // TODO: loop over all files
+                File file = fileExplorer.getNewFile();
+                if(file == null){
+                    break;
+                }
+                Charset encoding = encodingSelector.getEncoding(file);
+                if(encoding == null){
+                    continue;
+                }
+
+                String content = fileReaderWriter.readFile(file,encoding);
+
+                String result  = transformer.replaceChuck(content);
+                result = transformer.capitalizeWords(result);
+                result = transformer.wrapAndNumberLines(result);
+
+                File resultFile = new File(file.getPath() + ".processed");
+
+                fileReaderWriter.writeFile(resultFile,result,encoding);
+
+
 
             } catch (Exception e) {
                 System.out.println("Exception: " + e);
