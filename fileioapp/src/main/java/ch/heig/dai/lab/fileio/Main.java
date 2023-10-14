@@ -2,6 +2,7 @@ package ch.heig.dai.lab.fileio;
 
 import java.io.File;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 // *** TODO: Change this to import your own package ***
 import ch.heig.dai.lab.fileio.EwanHeig.FileExplorer;
@@ -66,7 +67,7 @@ public class Main {
 
                 File resultFile = new File(file.getPath() + ".processed");
 
-                fileReaderWriter.writeFile(resultFile,result,encoding);
+                fileReaderWriter.writeFile(resultFile,result, StandardCharsets.UTF_8);
 
 
 
