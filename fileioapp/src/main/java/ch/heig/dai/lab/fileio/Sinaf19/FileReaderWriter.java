@@ -20,7 +20,7 @@ public class FileReaderWriter {
         try {
             var reader = new BufferedReader(
                     new InputStreamReader(
-                            new FileInputStream(file.getName()),
+                            new FileInputStream(file),
                             encoding)
             );
 
@@ -57,7 +57,7 @@ public class FileReaderWriter {
         try {
             var writer = new BufferedWriter(
                     new OutputStreamWriter(
-                            new FileOutputStream(file.getName()),
+                            new FileOutputStream(file),
                             encoding)
             );
 
