@@ -17,7 +17,7 @@ public class FileReaderWriter {
         // Make sure to close the streams and readers at the end.
         try(BufferedReader reader = new BufferedReader(
                                         new InputStreamReader(
-                                            new FileInputStream(file.getName()), encoding) );){
+                                            new FileInputStream(file), encoding) );){
             String return_string = "", line;
             while((line = reader.readLine()) != null){
                 return_string += line + "\n";
@@ -42,7 +42,7 @@ public class FileReaderWriter {
         // Make sure to flush the data and close the streams and readers at the end.
         try(BufferedWriter writer = new BufferedWriter(
                                         new OutputStreamWriter(
-                                            new FileOutputStream(file.getName()), encoding) );){
+                                            new FileOutputStream(file), encoding) );){
             writer.write(content);
             writer.flush();
             return true;
