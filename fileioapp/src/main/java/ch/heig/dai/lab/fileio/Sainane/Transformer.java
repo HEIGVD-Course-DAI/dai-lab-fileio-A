@@ -1,6 +1,5 @@
 package ch.heig.dai.lab.fileio.Sainane;
 
-import static java.lang.Math.min;
 
 public class Transformer {
 
@@ -39,7 +38,7 @@ public class Transformer {
      * @return the transformed string
      */
     public String capitalizeWords(String source) {
-        // TODO: Implement the method body here.
+
         String[] words = source.split(" ");
         for (int i = 0; i < words.length; i++) {
             words[i] = words[i].substring(0, 1).toUpperCase() + words[i].substring(1);
@@ -55,32 +54,36 @@ public class Transformer {
      * @return the transformed string
      */
     public String wrapAndNumberLines(String source) {
-        // TODO: Implement the method body here.
         // Use the StringBuilder class to build the result string.
         StringBuilder sb = new StringBuilder();
         String[] words = source.split(" ");
-        int number = 1;
-        int numberLine = 2;
-        sb.append("1. ");
+        int number = 0;
+        int numberLine = 1;
+
+        StringBuilder line = new StringBuilder();
 
         for (String word : words) {
-            sb.append(word);
+            line.append(word);
+            number++;
 
             if (number% numWordsPerLine == 0) {
-                sb.append("\n");
-                sb.append(numberLine+ ".");
+                sb.append(numberLine).append(". ");
                 numberLine++;
 
 
             }
-
-                if (number < words.length) {
-                    sb.append(" ");
-                }
-                number++;
+            if(number== 3) {
+                sb.append(line).append("\n");
+                number = 0;
+                line = new StringBuilder();
+            } else {
+                line.append(" ");
             }
-        sb.append("\n");
 
+        }
+        if(!line.toString().trim().isEmpty()) {
+            sb.append(numberLine).append(". ").append(line.toString().trim()).append("\n");
+        }
 
         return sb.toString();
     }

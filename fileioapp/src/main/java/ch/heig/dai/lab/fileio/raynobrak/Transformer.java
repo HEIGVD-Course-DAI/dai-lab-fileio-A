@@ -5,6 +5,8 @@ public class Transformer {
     private final String newName;
     private final int numWordsPerLine;
 
+    private static final String CHUCK_NORRIS_NAME = "Chuck Norris";
+
     /**
      * Constructor
      * Initialize the Transformer with the name to replace "Chuck Norris" with 
@@ -23,8 +25,7 @@ public class Transformer {
      * @return the transformed string
      */
     public String replaceChuck(String source) {
-        // TODO: Implement the method body here.
-        return "";
+        return source.replaceAll(CHUCK_NORRIS_NAME, newName);
     }
 
     /**
@@ -33,8 +34,21 @@ public class Transformer {
      * @return the transformed string
      */
     public String capitalizeWords(String source) {
-        // TODO: Implement the method body here.
-        return "";
+        boolean isNextLetterStartOfWord = true;
+        var str = new StringBuilder();
+
+        for(int i = 0; i < source.length(); ++i) {
+            Character currentChar = source.charAt(i);
+            if(Character.isSpaceChar(currentChar)) {
+                isNextLetterStartOfWord = true;
+            }
+            else if(isNextLetterStartOfWord && Character.isLetterOrDigit(source.charAt(i))) {
+                currentChar =  Character.toUpperCase(currentChar);
+                isNextLetterStartOfWord = false;
+            }
+            str.append(currentChar);
+        }
+        return str.toString();
     }
 
     /**
@@ -44,8 +58,31 @@ public class Transformer {
      * @return the transformed string
      */
     public String wrapAndNumberLines(String source) {
-        // TODO: Implement the method body here.
-        // Use the StringBuilder class to build the result string.
-        return "";
+        var words = source.split(" ");
+
+        var wrappedText = new StringBuilder();
+
+        int currentLine = 1;
+        int wordsInCurrentLine = 0;
+        for(int i = 0; i < words.length; ++i) {
+            if(wordsInCurrentLine == 0) {
+                wrappedText.append(currentLine);
+                wrappedText.append(". ");
+            }
+
+            wrappedText.append(words[i]);
+            ++wordsInCurrentLine;
+            if(wordsInCurrentLine < numWordsPerLine && i != words.length - 1)
+                wrappedText.append(' ');
+
+            if(wordsInCurrentLine >= numWordsPerLine) {
+                wrappedText.append('\n');
+                wordsInCurrentLine = 0;
+                ++currentLine;
+            }
+        }
+        wrappedText.append('\n');
+
+        return wrappedText.toString();
     }
 }   

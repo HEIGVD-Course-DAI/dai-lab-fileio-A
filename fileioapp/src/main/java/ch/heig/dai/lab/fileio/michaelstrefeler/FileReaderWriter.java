@@ -15,7 +15,7 @@ public class FileReaderWriter {
         try(BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding))){
             StringBuilder contents = new StringBuilder();
             int c; // is -1 if end of file or char value 0-65535
-            while ((c = reader.read()) != -1) contents.append(c);
+            while ((c = reader.read()) != -1) contents.append((char)c);
             reader.close();
             return contents.toString();
         }catch (IOException e) {

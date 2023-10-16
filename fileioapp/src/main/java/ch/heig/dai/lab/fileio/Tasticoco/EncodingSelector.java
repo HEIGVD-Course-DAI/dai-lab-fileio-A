@@ -2,7 +2,7 @@ package ch.heig.dai.lab.fileio.Tasticoco;
 
 import java.io.File;
 import java.nio.charset.Charset;
-
+// #323
 public class EncodingSelector {
 
     /**
@@ -18,6 +18,20 @@ public class EncodingSelector {
      */
     public Charset getEncoding(File file) {
         // TODO: implement the method body here
-        return null;
+        String extension = "";
+
+        int indexExt = file.getName().lastIndexOf('.');
+        if(indexExt > 0){
+          extension = file.getName().substring(indexExt + 1);
+        }
+
+        return switch (extension) {
+            case "txt" -> Charset.forName("US-ASCII");
+            case "utf8" -> Charset.forName("UTF-8");
+            case "utf16be" -> Charset.forName("UTF-16BE");
+            case "utf16le" -> Charset.forName("UTF-16LE");
+            default -> null;
+        };
+
     }
 }
