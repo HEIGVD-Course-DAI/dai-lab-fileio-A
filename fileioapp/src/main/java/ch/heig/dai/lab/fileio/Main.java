@@ -37,9 +37,9 @@ public class Main {
         FileReaderWriter fileReaderWriter = new FileReaderWriter();
         Transformer transformer = new Transformer(newName, wordsPerLine);
 
-        while (true) {
+        File file;
+        while ((file = fileExplorer.getNewFile()) != null) {
             try {
-                for (File file = fileExplorer.getNewFile(); file != null; file = fileExplorer.getNewFile()) {
                     Charset encoding = encodingSelector.getEncoding(file);
 
                     if (encoding != null) {
@@ -53,7 +53,6 @@ public class Main {
                             File processedFile = new File(file.getPath() + ".processed");
                             fileReaderWriter.writeFile(processedFile, transformedContent, StandardCharsets.UTF_8);
                         }
-                    }
                 }
             } catch (Exception e) {
                 System.out.println("Exception: " + e);
