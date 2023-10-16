@@ -60,7 +60,6 @@ public class Main {
                 if (read == null) {
                     continue;
                 }
-
                 //Transforming
                 read = transformers.replaceChuck(read);
                 read = transformers.capitalizeWords(read);
