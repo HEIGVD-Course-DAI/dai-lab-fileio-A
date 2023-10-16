@@ -36,26 +36,29 @@ public class Main {
         EncodingSelector encodingSelector = new EncodingSelector();
         FileReaderWriter fileReaderWriter = new FileReaderWriter();
         Transformer transformer = new Transformer(newName, wordsPerLine);
+        File file;
+        Charset encoding;
         while (true) {
             try {
+                    file = fileExplorer.getNewFile();
+                    if(file == null) {
+                        break;
+                    }
+                   encoding = encodingSelector.getEncoding(file);
+                    if(encoding == null) continue;
 
-                for(File file = fileExplorer.getNewFile(); file != null; file = fileExplorer.getNewFile()) {
-                    Charset encoding = encodingSelector.getEncoding(file);
-                    if(encoding != null) {
 
+                    String content = fileReaderWriter.readFile(file, encoding);
+                    if(content != null) {
+                        String transformedContent = transformer.replaceChuck(content);
+                        transformedContent = transformer.capitalizeWords(transformedContent);
+                        transformedContent = transformer.wrapAndNumberLines(transformedContent);
 
-                        String content = fileReaderWriter.readFile(file, encoding);
-                        if(content != null) {
-                            String transformedContent = transformer.replaceChuck(content);
-                            transformedContent = transformer.capitalizeWords(transformedContent);
-                            transformedContent = transformer.wrapAndNumberLines(transformedContent);
-
-                            File newFile = new File(file.getPath() + ".processed");
-                            fileReaderWriter.writeFile(newFile, transformedContent, StandardCharsets.UTF_8);
-                        }
+                        File newFile = new File(file.getPath() + ".processed");
+                        fileReaderWriter.writeFile(newFile, transformedContent, StandardCharsets.UTF_8);
                     }
 
-                }
+
 
             } catch (Exception e) {
                 System.out.println("Exception: " + e);
