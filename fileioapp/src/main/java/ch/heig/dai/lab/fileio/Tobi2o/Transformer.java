@@ -23,8 +23,7 @@ public class Transformer {
      * @return the transformed string
      */
     public String replaceChuck(String source) {
-        // TODO: Implement the method body here.
-        return "";
+        return source.replace("Chuck Norris", newName);
     }
 
     /**
@@ -32,20 +31,53 @@ public class Transformer {
      * @param source the string to transform
      * @return the transformed string
      */
-    public String capitalizeWords(String source) {
-        // TODO: Implement the method body here.
-        return "";
+    public String capitalizeWords(String source) { 
+        String[] words = source.split("\\s+");
+        StringBuilder result = new StringBuilder();
+    
+        for (String word : words) {
+            result.append(Character.toUpperCase(word.charAt(0))).append(word.substring(1)).append(" ");
+        }
+        return result.toString().trim();
     }
 
-    /**
-     * Wrap the text so that there are at most numWordsPerLine words per line.
-     * Number the lines starting at 1.
-     * @param source the string to transform
-     * @return the transformed string
-     */
-    public String wrapAndNumberLines(String source) {
-        // TODO: Implement the method body here.
-        // Use the StringBuilder class to build the result string.
-        return "";
+/**
+ * Wrap the text so that there are at most numWordsPerLine words per line.
+ * Number the lines starting at 1.
+ * @param source the string to transform
+ * @return the transformed string
+ */
+public String wrapAndNumberLines(String source) {
+
+    StringBuilder result = new StringBuilder();
+    String[] words = source.split("\\s+");
+    int currentWordCount = 0;
+    int currentLineNumber = 1;
+
+    result.append(currentLineNumber).append(". ");
+
+    for (int i = 0; i < words.length; i++) {
+        String word = words[i];
+        result.append(word);
+
+        currentWordCount++;
+
+        boolean isLastWord = (i == words.length - 1);
+        boolean shouldWrap = (currentWordCount >= numWordsPerLine);
+
+        if (shouldWrap || isLastWord) {
+            if (!isLastWord) {
+                result.append("\n");
+                result.append(++currentLineNumber).append(". ");
+                currentWordCount = 0;
+            } else {
+                result.append("\n");
+            }
+        } else {
+            result.append(" ");
+        }
     }
-}   
+    return result.toString();
+}
+    
+}

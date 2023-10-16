@@ -18,7 +18,6 @@ public class EncodingSelector {
      * @return the encoding of the file, or null if the extension is not recognized
      */
     public Charset getEncoding(File file) {
-        // TODO: implement the method body here
         String name = file.getName();
         int point = name.lastIndexOf(".");
 
