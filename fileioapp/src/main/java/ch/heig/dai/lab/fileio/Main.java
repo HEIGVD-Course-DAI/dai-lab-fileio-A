@@ -2,6 +2,7 @@ package ch.heig.dai.lab.fileio;
 
 import java.io.File;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 
 // *** TODO: Change this to import your own package ***
@@ -66,7 +67,7 @@ public class Main {
                 read = transformers.wrapAndNumberLines(read);
 
                 var write = new File(file.getPath() + ".processed");
-                reader.writeFile(write, read, encoding);
+                reader.writeFile(write, read, StandardCharsets.UTF_8 );
 
 
             } catch (Exception e) {
