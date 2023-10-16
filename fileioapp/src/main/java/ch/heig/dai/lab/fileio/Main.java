@@ -18,9 +18,9 @@ public class Main {
      * In an infinite loop, get a new file from the FileExplorer, determine its encoding with the EncodingSelector,
      * read the file with the FileReaderWriter, transform the content with the Transformer, write the result with the
      * FileReaderWriter.
-     *
+     * <p>
      * Result files are written in the same folder as the input files, and encoded with UTF8.
-     *
+     * <p>
      * File name of the result file:
      * an input file "myfile.utf16le" will be written as "myfile.utf16le.processed",
      * i.e., with a suffixe ".processed".
@@ -61,12 +61,14 @@ public class Main {
                     continue;
                 }
                 //Transforming
+                System.out.println(read);
                 read = transformers.replaceChuck(read);
                 read = transformers.capitalizeWords(read);
                 read = transformers.wrapAndNumberLines(read);
+                System.out.println(read);
 
                 var write = new File(file.getPath() + ".processed");
-                reader.writeFile(write, read, StandardCharsets.UTF_8 );
+                reader.writeFile(write, read, StandardCharsets.UTF_8);
 
 
             } catch (Exception e) {
