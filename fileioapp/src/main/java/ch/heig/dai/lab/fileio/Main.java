@@ -1,13 +1,17 @@
 package ch.heig.dai.lab.fileio;
 
 import java.io.File;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 // *** TODO: Change this to import your own package ***
-import ch.heig.dai.lab.fileio.jehrensb.*;
+import ch.heig.dai.lab.fileio.AdrianRogner.*;
+
+import javax.crypto.spec.PSource;
 
 public class Main {
     // *** TODO: Change this to your own name ***
-    private static final String newName = "Jean-Claude Van Damme";
+    private static final String newName = "Adrian Rogner";
 
     /**
      * Main method to transform files in a folder.
@@ -32,10 +36,31 @@ public class Main {
         int wordsPerLine = Integer.parseInt(args[1]);
         System.out.println("Application started, reading folder " + folder + "...");
         // TODO: implement the main method here
+        FileExplorer fileExplorer = new FileExplorer(folder);
+        EncodingSelector encodingSelector = new EncodingSelector();
+        FileReaderWriter fileReaderWriter = new FileReaderWriter();
+        Transformer transformer = new Transformer(newName, wordsPerLine);
+        Charset charset;
+        String text;
+        File f;
 
         while (true) {
             try {
                 // TODO: loop over all files
+                f = fileExplorer.getNewFile();
+                if(f == null) {
+                    break;
+                }
+                charset = encodingSelector.getEncoding(f);
+                if(charset == null) {
+                    continue;
+                }
+                text = fileReaderWriter.readFile(f, charset);
+                text = transformer.replaceChuck(text);
+                text = transformer.capitalizeWords(text);
+                text = transformer.wrapAndNumberLines(text);
+                File fOutput = new File(f.getPath() + ".processed");
+                fileReaderWriter.writeFile(fOutput, text, StandardCharsets.UTF_8);
 
             } catch (Exception e) {
                 System.out.println("Exception: " + e);
