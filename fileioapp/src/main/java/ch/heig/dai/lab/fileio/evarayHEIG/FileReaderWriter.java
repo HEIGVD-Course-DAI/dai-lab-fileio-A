@@ -22,7 +22,7 @@ public class FileReaderWriter {
             var reader = new BufferedReader(new InputStreamReader(fileReader, encoding));
             String line;
             while ((line = reader.readLine()) != null) {
-                writer.append(line).append("\r\n");
+                writer.append(line).append(System.lineSeparator());
             }
             return writer.toString();
         } catch (IOException e){
