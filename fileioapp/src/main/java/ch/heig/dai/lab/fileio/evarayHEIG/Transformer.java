@@ -23,7 +23,6 @@ public class Transformer {
      * @return the transformed string
      */
     public String replaceChuck(String source) {
-        // TODO: Implement the method body here.
         return source.replaceAll("Chuck Norris", newName);
     }
 
@@ -33,7 +32,6 @@ public class Transformer {
      * @return the transformed string
      */
     public String capitalizeWords(String source) {
-        // TODO: Implement the method body here.
         String[] words = source.split(" ");
         StringBuilder capitalizedString = new StringBuilder();
         for(String word : words){
@@ -51,7 +49,6 @@ public class Transformer {
      * @return the transformed string
      */
     public String wrapAndNumberLines(String source) {
-        // TODO: Implement the method body here.
         // Use the StringBuilder class to build the result string.
 
         StringBuilder newString = new StringBuilder();
