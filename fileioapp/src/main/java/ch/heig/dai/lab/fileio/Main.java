@@ -3,11 +3,13 @@ package ch.heig.dai.lab.fileio;
 import java.io.File;
 
 // *** TODO: Change this to import your own package ***
-import ch.heig.dai.lab.fileio.jehrensb.*;
+import ch.heig.dai.lab.fileio.kevinAuberson.*;
+
+import javax.swing.*;
 
 public class Main {
     // *** TODO: Change this to your own name ***
-    private static final String newName = "Jean-Claude Van Damme";
+    private static final String newName = "Kevin Auberson";
 
     /**
      * Main method to transform files in a folder.
@@ -31,12 +33,42 @@ public class Main {
         String folder = args[0];
         int wordsPerLine = Integer.parseInt(args[1]);
         System.out.println("Application started, reading folder " + folder + "...");
-        // TODO: implement the main method here
+        FileExplorer explorer = new FileExplorer(folder);
+        EncodingSelector encoding = new EncodingSelector();
+        FileReaderWriter fileRW = new FileReaderWriter();
+        Transformer transformer = new Transformer(newName,wordsPerLine);
 
         while (true) {
             try {
-                // TODO: loop over all files
+                File file = explorer.getNewFile();
+                if(file == null){
+                    System.out.println("No more file in the directory");
+                    break;
+                }
 
+                if(encoding.getEncoding(file) == null){
+                    System.out.println("Unsupported file encoding for : " + file.getName());
+                    continue;
+                }
+
+                String fileContent = fileRW.readFile(file, encoding.getEncoding(file));
+                if(fileContent == null){
+                    System.out.println("Error on reading the file : " + file.getName());
+                    continue;
+                }
+
+                String convertedFileContent = transformer.replaceChuck(fileContent);
+                convertedFileContent = transformer.capitalizeWords(convertedFileContent);
+                convertedFileContent = transformer.wrapAndNumberLines(convertedFileContent);
+
+                File outputFile = new File(file.getAbsolutePath() + ".processed");
+
+                boolean writeFile = fileRW.writeFile(outputFile,convertedFileContent,encoding.getEncoding(file));
+                if (writeFile) {
+                    System.out.println("Processed! write in : " + outputFile.getName());
+                } else {
+                    System.out.println("Failed! to write in : " + outputFile.getName());
+                }
             } catch (Exception e) {
                 System.out.println("Exception: " + e);
             }
