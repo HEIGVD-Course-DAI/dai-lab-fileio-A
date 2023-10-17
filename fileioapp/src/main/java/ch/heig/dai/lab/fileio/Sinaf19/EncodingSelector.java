@@ -33,6 +33,6 @@ public class EncodingSelector {
                  StandardCharsets.UTF_16LE;
             default ->
                  null;
-        }
+        };
     }
 }
