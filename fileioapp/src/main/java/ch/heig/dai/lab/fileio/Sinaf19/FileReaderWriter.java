@@ -28,6 +28,8 @@ public class FileReaderWriter {
             while ((line = reader.readLine()) != null) {
                 content.append(line).append(System.lineSeparator());
             }
+            // Permet de delete le dernier retour à la ligne.
+            content.deleteCharAt(content.length() - 1);
 
             reader.close();
             return content.toString();
