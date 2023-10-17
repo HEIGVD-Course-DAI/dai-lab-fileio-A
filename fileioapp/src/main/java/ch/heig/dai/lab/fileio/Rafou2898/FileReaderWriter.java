@@ -27,6 +27,8 @@ public class FileReaderWriter {
                 content.append(line).append('\n');
 
             }
+            content.deleteCharAt(content.length() - 1);
+
 
             reader.close();
             return content.toString();
