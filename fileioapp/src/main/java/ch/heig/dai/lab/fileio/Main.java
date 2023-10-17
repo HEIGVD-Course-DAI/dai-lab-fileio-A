@@ -61,11 +61,10 @@ public class Main {
                     continue;
                 }
                 //Transforming
-                System.out.println(read);
+
                 read = transformers.replaceChuck(read);
                 read = transformers.capitalizeWords(read);
                 read = transformers.wrapAndNumberLines(read);
-                System.out.println(read);
 
                 var write = new File(file.getPath() + ".processed");
                 reader.writeFile(write, read, StandardCharsets.UTF_8);
