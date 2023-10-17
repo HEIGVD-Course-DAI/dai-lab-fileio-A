@@ -1,8 +1,10 @@
 package ch.heig.dai.lab.fileio;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 
 import ch.heig.dai.lab.fileio.Amouti.*;
+
 
 public class Main {
     private static final String newName = "Amir Mouti";
@@ -44,8 +46,11 @@ public class Main {
                 }
 
                 String content = frw.readFile(newFile, enc.getEncoding(newFile));
-                String transformedContent = tr.wrapAndNumberLines(tr.replaceChuck(content));
-                frw.writeFile(newFile, transformedContent, enc.getEncoding(newFile));
+                String transformedContent =
+                        tr.wrapAndNumberLines(tr.capitalizeWords(tr.replaceChuck(content)));
+
+                frw.writeFile(new File(folder + "\\" + newFile.getName() + ".processed"),
+                        transformedContent, StandardCharsets.UTF_8);
 
 
             } catch (Exception e) {
