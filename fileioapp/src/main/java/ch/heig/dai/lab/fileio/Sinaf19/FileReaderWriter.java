@@ -24,21 +24,18 @@ public class FileReaderWriter {
                             encoding)
             );
 
-            while (reader.readLine() != null) {
+            String line;
+            while ((line = reader.readLine()) != null) {
                 content.append(reader.readLine()).append('\n');
             }
+            // Permet de delete le dernier retour à la ligne
+            content.deleteCharAt(content.length() - 1);
 
             reader.close();
-
+            return content.toString();
         } catch (IOException e) {
             System.out.println("Exception: " + e);
             return null;
-        }
-
-        if (content.isEmpty()) {
-            return null;
-        } else {
-            return content.toString();
         }
     }
 
