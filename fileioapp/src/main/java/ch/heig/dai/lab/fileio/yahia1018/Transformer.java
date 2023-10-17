@@ -23,8 +23,18 @@ public class Transformer {
      * @return the transformed string
      */
     public String replaceChuck(String source) {
-        // TODO: Implement the method body here.
-        return "";
+        final String chuck = "Chuck Norris";
+
+        return source.replaceAll(chuck, this.newName);
+    }
+
+    /**
+     * Extract all the words from a String into an array.
+     * @param source the string from which to extract the words
+     * @return an array with the (String) words
+     */
+    private String[] getWords(String source) {
+        return source.split(" ");
     }
 
     /**
@@ -33,8 +43,18 @@ public class Transformer {
      * @return the transformed string
      */
     public String capitalizeWords(String source) {
-        // TODO: Implement the method body here.
-        return "";
+        if (source.isEmpty()) return "";
+
+        String[] words = getWords(source);
+        StringBuilder dest = new StringBuilder();
+
+        for (String word:words) {
+            String  firstLetter = word.substring(0, 1),
+                    restOfWord = word.substring(1);
+            dest.append(firstLetter.toUpperCase()).append(restOfWord).append(" ");
+        }
+
+        return dest.toString().trim();
     }
 
     /**
@@ -44,8 +64,21 @@ public class Transformer {
      * @return the transformed string
      */
     public String wrapAndNumberLines(String source) {
-        // TODO: Implement the method body here.
-        // Use the StringBuilder class to build the result string.
-        return "";
+        if (source.isEmpty()) return "";
+
+        String[] words = getWords(source);
+        StringBuilder dest = new StringBuilder("1.");
+        int i = 0, j = 1;
+
+        for (String word:words) {
+            dest.append(" ").append(word);
+
+            if (++i % numWordsPerLine == 0 && i != words.length) {
+                dest.append('\n').append(++j).append('.');
+            }
+        }
+
+        dest.append('\n');
+        return dest.toString();
     }
 }   
