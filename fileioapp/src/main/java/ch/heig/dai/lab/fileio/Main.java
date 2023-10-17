@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 // *** TODO: Change this to import your own package ***
-import ch.heig.dai.lab.fileio.jehrensb.*;
+import ch.heig.dai.lab.fileio.CristhianRo.*;
 
 public class Main {
     // *** TODO: Change this to your own name ***
@@ -45,12 +45,12 @@ public class Main {
             try {
                 // TODO: loop over all files
                 File file = fileExplorer.getNewFile();
-                /*
+                
                 if (file == null) {
                     System.out.println("No more files to process.");
                     break;
                 }
-                */
+                
                  Charset encoding = encodingSelector.getEncoding(file);
                 String content = fileReaderWriter.readFile(file, encoding);
 
