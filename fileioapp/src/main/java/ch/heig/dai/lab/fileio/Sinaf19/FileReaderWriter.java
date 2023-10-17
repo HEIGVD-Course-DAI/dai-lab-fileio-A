@@ -62,12 +62,12 @@ public class FileReaderWriter {
 
             writer.flush();
             writer.close();
-
+            return true;
         } catch (IOException e) {
             System.out.println("Exception: " + e);
             return false;
         }
 
-        return true;
+
     }
 }
