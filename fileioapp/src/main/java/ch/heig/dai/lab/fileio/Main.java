@@ -45,12 +45,12 @@ public class Main {
             try {
                 // TODO: loop over all files
                 File file = fileExplorer.getNewFile();
-
+                /*
                 if (file == null) {
                     System.out.println("No more files to process.");
                     break;
                 }
-
+                */
                  Charset encoding = encodingSelector.getEncoding(file);
                 String content = fileReaderWriter.readFile(file, encoding);
 
