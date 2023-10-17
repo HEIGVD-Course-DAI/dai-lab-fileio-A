@@ -29,6 +29,7 @@ public class Transformer {
         final String name = "Chuck Norris";
 
         return source.replaceAll(name, newName);
+
     }
 
     /**
@@ -70,9 +71,11 @@ public class Transformer {
         StringBuilder retour = new StringBuilder("1. " + mots[0]);
 
         for (int i = 1; i < mots.length; i++) {
+
             if (i % numWordsPerLine == 0) {
                 retour.append("\n").append(i / numWordsPerLine + 1).append(". ");
             } else {
+
                 retour.append(" ");
             }
             retour.append(mots[i]);

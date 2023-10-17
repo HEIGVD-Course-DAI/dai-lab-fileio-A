@@ -24,7 +24,8 @@ public class Transformer {
      */
     public String replaceChuck(String source) {
         // TODO: Implement the method body here.
-        return "";
+        String Chuck = "Chuck Norris";
+        return source.replaceAll(Chuck,newName);
     }
 
     /**
@@ -34,7 +35,14 @@ public class Transformer {
      */
     public String capitalizeWords(String source) {
         // TODO: Implement the method body here.
-        return "";
+        char caractere;
+        for(int i = 0;i<source.length();i++){
+            if(i==0 || source.charAt(i-1) == ' '){
+                caractere = Character.toUpperCase(source.charAt(i));
+                source = source.substring(0,i) + caractere + source.substring(i+1);
+            }
+        }
+        return source;
     }
 
     /**
@@ -46,6 +54,33 @@ public class Transformer {
     public String wrapAndNumberLines(String source) {
         // TODO: Implement the method body here.
         // Use the StringBuilder class to build the result string.
-        return "";
+        int newLineStart = 0,wordCounter = 0,lineNumber = 1;
+        StringBuilder result = new StringBuilder(source.length());
+        String intermediate;
+
+        for(int i = 0;;i++){
+            //count the words
+            if(source.charAt(i) == ' '){
+                wordCounter++;
+            }
+
+            if(wordCounter == numWordsPerLine){
+                //add the line number and content in the result buffer
+                intermediate = source.substring(newLineStart,i);
+                result.append(lineNumber + ". " + intermediate + "\n");
+
+                wordCounter = 0;
+                //set de beginning of the next line to the next character (skip the space)
+                newLineStart = i+1;
+                lineNumber++;
+            }
+
+            if(i==source.length() - 1){
+                //i+1 is for the last character (usualy '.')
+                intermediate = source.substring(newLineStart,i+1);
+                result.append(lineNumber + ". " + intermediate + "\n");
+                return result.toString();
+            }
+        }
     }
 }   
