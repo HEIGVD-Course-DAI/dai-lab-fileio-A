@@ -10,7 +10,7 @@ import ch.heig.dai.lab.fileio.CristhianRo.*;
 
 public class Main {
     // *** TODO: Change this to your own name ***
-    private static final String newName = "Jean-Claude Van Damme";
+    private static final String newName = "Cristhian Ronquillo";
 
     /**
      * Main method to transform files in a folder.
@@ -51,7 +51,7 @@ public class Main {
                     break;
                 }
                 
-                 Charset encoding = encodingSelector.getEncoding(file);
+                Charset encoding = encodingSelector.getEncoding(file);
                 String content = fileReaderWriter.readFile(file, encoding);
 
                 if (content != null) {
