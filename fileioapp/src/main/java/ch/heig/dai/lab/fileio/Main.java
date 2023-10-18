@@ -47,15 +47,17 @@ public class Main {
 
         while (true) {
             try {
+                //Get all files in the folder
                 File file = FE.getNewFile();
                 if(file == null)
                     break;
                 
-                if(ES.getExtension(file) == newExtension || file.isDirectory()){
+                if(file.isDirectory()){
                     continue;
                 }
                 
-                System.out.println(file.getName());
+                //System.out.println(file.getName());
+                //Move to the next file if no encoding can be read 
                 Charset encoding = ES.getEncoding(file);
                 if(encoding == null){
                     continue;
@@ -63,18 +65,15 @@ public class Main {
                 
                 String content = FRW.readFile(file, encoding);
                 
-                //Transformations of the content
-                
-                content = TF.replaceChuck(content);
-            
-                content = TF.capitalizeWords(content);
+                //Transformations of the content if file is not blank
+                if(content != null){
 
-                content = TF.wrapAndNumberLines(content);
+                    content = TF.replaceChuck(content);
+                    content = TF.capitalizeWords(content);
+                    content = TF.wrapAndNumberLines(content);
+                }
                 
-                
-                
-                
-                //Writing of the new content in a new file
+                //Writing the new content in a new file
                 String nameWOExtention = file.getName().substring(0, file.getName().lastIndexOf('.'));
                 String path = folder + "\\" + nameWOExtention + "." + newExtension;
                 File outputFile = new File(path);

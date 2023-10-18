@@ -24,7 +24,6 @@ public class Transformer {
      */
     public String replaceChuck(String source) {
         
-        //System.out.println("source: " + source);
         String transformedString = source.replace("Chuck Norris", newName);
         return transformedString;
     }
@@ -45,6 +44,7 @@ public class Transformer {
             transformedString = String.join(" ", transformedString, word);
 
         }
+        //Remove the blank space at character 0
         transformedString = transformedString.substring(1, transformedString.length());
         
         return transformedString;
@@ -58,14 +58,15 @@ public class Transformer {
      */
     public String wrapAndNumberLines(String source) {
         
-        
         String[] words = source.split(" ");
 
         StringBuilder transformedString = new StringBuilder();
         int numLine = 1;
         for(int n = 0; n < words.length;n += numWordsPerLine){
 
+            //Begining of the line
             transformedString.append(numLine + ". ");
+            //Add the n word to the line
             for(int m = 0; m < numWordsPerLine; m++){
                 
                 if(n+m < words.length){
@@ -75,7 +76,7 @@ public class Transformer {
                 }
                 
             }
-           
+            //End of the line
             transformedString.append("\n");
             numLine++;
         }
