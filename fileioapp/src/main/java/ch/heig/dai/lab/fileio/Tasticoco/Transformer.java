@@ -24,7 +24,8 @@ public class Transformer {
      */
     public String replaceChuck(String source) {
         // TODO: Implement the method body here.
-        return "";
+        final String toReplace = "Chuck Norris";
+        return source.replaceAll(toReplace, this.newName);
     }
 
     /**
@@ -34,7 +35,14 @@ public class Transformer {
      */
     public String capitalizeWords(String source) {
         // TODO: Implement the method body here.
-        return "";
+        String[] words = source.split("\\s+");
+        StringBuilder capitalizeWords = new StringBuilder();
+        for(String word : words){
+            String firstChar = word.substring(0, 1);
+            String remain = word.substring(1);
+            capitalizeWords.append(firstChar.toUpperCase()).append(remain).append(" ");
+        }
+        return capitalizeWords.toString().trim();
     }
 
     /**
@@ -46,6 +54,24 @@ public class Transformer {
     public String wrapAndNumberLines(String source) {
         // TODO: Implement the method body here.
         // Use the StringBuilder class to build the result string.
-        return "";
+        String[] words = source.split("\\s+");
+        StringBuilder wrappedAndNumbered = new StringBuilder();
+        int lastWordInd = words.length - 1;
+
+        for(int i = 0; i < lastWordInd; i++){
+            if(i % this.numWordsPerLine == 0)
+                wrappedAndNumbered.append(i / this.numWordsPerLine + 1).append(". ");
+
+            wrappedAndNumbered.append(words[i]);
+
+            if((i + 1) % this.numWordsPerLine != 0)
+                wrappedAndNumbered.append(" ");
+            else
+                wrappedAndNumbered.append("\n");
+        }
+
+        wrappedAndNumbered.append(words[lastWordInd]).append("\n");
+
+        return wrappedAndNumbered.toString();
     }
 }   

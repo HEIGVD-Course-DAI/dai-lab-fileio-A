@@ -41,6 +41,8 @@ public class FileReaderWriter {
              BufferedWriter writer = new BufferedWriter(outputStreamWriter)) {
 
             writer.write(content);
+            writer.flush();
+
             return true;
         } catch (IOException e) {
             e.printStackTrace();

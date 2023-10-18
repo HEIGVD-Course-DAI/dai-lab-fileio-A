@@ -19,7 +19,7 @@ public class FileReaderWriter {
 
             while ((c = reader.read()) != -1){
                 String str = content;
-                content = str + c;
+                content = str + (char) c;
             }
 
             reader.close();

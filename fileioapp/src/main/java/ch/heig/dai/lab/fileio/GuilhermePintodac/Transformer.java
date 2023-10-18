@@ -23,8 +23,7 @@ public class Transformer {
      * @return the transformed string
      */
     public String replaceChuck(String source) {
-        // TODO: Implement the method body here.
-        return "";
+        return source.replaceAll("Chuck Norris", newName);
     }
 
     /**
@@ -33,8 +32,17 @@ public class Transformer {
      * @return the transformed string
      */
     public String capitalizeWords(String source) {
-        // TODO: Implement the method body here.
-        return "";
+        StringBuilder result = new StringBuilder();
+
+        result.append(Character.toUpperCase(source.charAt(0)));
+        for (int i = 1; i < source.length(); i++){
+            if (source.charAt(i - 1) == ' '){
+                result.append(Character.toUpperCase(source.charAt(i)));
+            }else {
+                result.append(source.charAt(i));
+            }
+        }
+        return result.toString();
     }
 
     /**
@@ -44,8 +52,22 @@ public class Transformer {
      * @return the transformed string
      */
     public String wrapAndNumberLines(String source) {
-        // TODO: Implement the method body here.
-        // Use the StringBuilder class to build the result string.
-        return "";
+        StringBuilder result = new StringBuilder();
+
+        var words = source.split(" ");
+        var nbWords = words.length;
+
+        int line = 1;
+        result.append(line + ". ");
+        for (int i = 0; i < nbWords; i++){
+            if (i % numWordsPerLine == 0 && i != 0){
+                result.deleteCharAt(result.length() - 1);
+                result.append("\n" + ++line + ". ");
+            }
+            result.append(words[i] + " ");
+        }
+        result.deleteCharAt(result.length() - 1);
+        result.append("\n");
+        return result.toString();
     }
 }   

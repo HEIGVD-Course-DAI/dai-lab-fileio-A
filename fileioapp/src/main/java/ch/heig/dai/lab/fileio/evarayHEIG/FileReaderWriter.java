@@ -22,8 +22,9 @@ public class FileReaderWriter {
             var reader = new BufferedReader(new InputStreamReader(fileReader, encoding));
             String line;
             while ((line = reader.readLine()) != null) {
-                writer.append(line).append("\r\n");
+                writer.append(line).append("\n");
             }
+            writer.deleteCharAt(writer.length() - 1);
             return writer.toString();
         } catch (IOException e){
             System.out.println("Exception: " + e);

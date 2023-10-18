@@ -43,6 +43,8 @@ public class FileReaderWriter {
         // Make sure to flush the data and close the streams and readers at the end.
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), encoding))) {
             writer.write(content);
+            writer.flush(); // not necessary, but good practice 
+            writer.close(); // not necessary, but good practice
             return true;
         } catch (IOException e) {
             e.printStackTrace();

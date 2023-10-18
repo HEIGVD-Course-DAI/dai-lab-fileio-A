@@ -23,7 +23,10 @@ public class FileReaderWriter {
             String line;
             while ((line = reader.readLine()) != null) {
                 builder.append(line);
+                builder.append("\n");
             }
+
+            builder.deleteCharAt(builder.length()-1);
             return builder.toString();
         } catch (IOException e) {
             System.out.println("Exception: " + e);
