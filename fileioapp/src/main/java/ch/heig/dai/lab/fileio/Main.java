@@ -1,13 +1,14 @@
 package ch.heig.dai.lab.fileio;
 
 import java.io.File;
+import java.nio.charset.Charset;
 
 // *** TODO: Change this to import your own package ***
-import ch.heig.dai.lab.fileio.jehrensb.*;
+import ch.heig.dai.lab.fileio.Tasticoco.*;
 
 public class Main {
     // *** TODO: Change this to your own name ***
-    private static final String newName = "Jean-Claude Van Damme";
+    private static final String newName = "Arthur Junod";
 
     /**
      * Main method to transform files in a folder.
@@ -33,9 +34,28 @@ public class Main {
         System.out.println("Application started, reading folder " + folder + "...");
         // TODO: implement the main method here
 
+        FileExplorer fileExplorer = new ch.heig.dai.lab.fileio.Tasticoco.FileExplorer(folder);
+        EncodingSelector encodingSelector = new ch.heig.dai.lab.fileio.Tasticoco.EncodingSelector();
+        FileReaderWriter fileReaderWriter = new ch.heig.dai.lab.fileio.Tasticoco.FileReaderWriter();
+        Transformer transformer = new Transformer(newName, wordsPerLine);
+
         while (true) {
             try {
                 // TODO: loop over all files
+                File fileToProcess = fileExplorer.getNewFile();
+                if(fileToProcess == null) break;
+
+                Charset encoding = encodingSelector.getEncoding(fileToProcess);
+                if(encoding == null) continue;
+
+                String content = fileReaderWriter.readFile(fileToProcess, encoding);
+                if(content == null) continue;
+
+                String processedContent =
+                        transformer.wrapAndNumberLines(transformer.capitalizeWords(transformer.replaceChuck(content)));
+
+                fileReaderWriter.writeFile(new File(fileToProcess.getAbsolutePath() + ".processed"),
+                        processedContent, Charset.forName("UTF-8"));
 
             } catch (Exception e) {
                 System.out.println("Exception: " + e);
