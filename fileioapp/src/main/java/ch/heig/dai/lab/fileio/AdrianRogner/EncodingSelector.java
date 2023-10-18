@@ -32,8 +32,6 @@ public class EncodingSelector {
                     return StandardCharsets.UTF_16BE;
                 case "utf16le":
                     return StandardCharsets.UTF_16LE;
-                default :
-                    return null;
             }
         }
         return null;
