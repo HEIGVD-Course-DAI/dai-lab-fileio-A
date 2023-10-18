@@ -27,15 +27,13 @@ public class Main {
      */
     public static void main(String[] args) {
         // Read command line arguments
-        /* 
         if (args.length != 2 || !new File(args[0]).isDirectory()) {
             System.out.println("You need to provide two command line arguments: an existing folder and the number of words per line.");
             System.exit(1);
         }
         String folder = args[0];
-        int wordsPerLine = Integer.parseInt(args[1]);*/
-        int wordsPerLine = 3;
-        String folder = "C:/Users/Heig-VD-User/Documents/DAI/jokes";
+        int wordsPerLine = Integer.parseInt(args[1]);
+        
         System.out.println("Application started, reading folder " + folder + "...");
 
         FileExplorer FE = new FileExplorer(folder);
@@ -56,13 +54,12 @@ public class Main {
                     continue;
                 }
                 
-                //System.out.println(file.getName());
                 //Move to the next file if no encoding can be read 
                 Charset encoding = ES.getEncoding(file);
                 if(encoding == null){
                     continue;
                 }
-                
+                System.out.println("Reading of " + file.getName());
                 String content = FRW.readFile(file, encoding);
                 
                 //Transformations of the content if file is not blank
@@ -79,6 +76,7 @@ public class Main {
                 File outputFile = new File(path);
 
                 FRW.writeFile(outputFile, content, encoding);
+                System.out.println(outputFile.getName() + " written\n");
                 
 
             } catch (Exception e) {

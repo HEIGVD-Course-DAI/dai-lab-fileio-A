@@ -7,7 +7,7 @@ public class Transformer {
 
     /**
      * Constructor
-     * Initialize the Transformer with the name to replace "Chuck Norris" with 
+     * Initialize the Transformer with the name to replace "Chuck Norris" with a new name
      * and the number of words per line to use when wrapping the text.
      * @param newName the name to replace "Chuck Norris" with
      * @param numWordsPerLine the number of words per line to use when wrapping the text
@@ -37,10 +37,16 @@ public class Transformer {
         String[] words = source.split(" ");
         String transformedString = new String();
         for(String word : words){
+
+            //Split the 1st letter of the word from the other letters
             String firstletter = word.substring(0, 1);
             String remainingLetters = word.substring(1, word.length());
+
+            //Uppercase the 1st letter and put it with the rest 
             firstletter = firstletter.toUpperCase();
             word = firstletter + remainingLetters;
+
+            //Add the modified word in a new string seperated by a space
             transformedString = String.join(" ", transformedString, word);
 
         }
@@ -66,7 +72,8 @@ public class Transformer {
 
             //Begining of the line
             transformedString.append(numLine + ". ");
-            //Add the n word to the line
+
+            //Add 'numWordsPerLine' words to the line
             for(int m = 0; m < numWordsPerLine; m++){
                 
                 if(n+m < words.length){

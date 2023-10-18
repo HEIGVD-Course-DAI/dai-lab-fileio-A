@@ -23,9 +23,10 @@ public class EncodingSelector {
             return null;
         }
 
-        //Get only the text after the last dot.
+        //Get only the text after the last dot
         String extension = getExtension(file);
 
+        //Compare the extension with encoding standards
         switch(extension){
 
             case "utf8":
