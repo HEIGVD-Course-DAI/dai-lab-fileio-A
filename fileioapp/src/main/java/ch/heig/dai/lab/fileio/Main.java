@@ -1,6 +1,7 @@
 package ch.heig.dai.lab.fileio;
 
 import java.io.File;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 import ch.heig.dai.lab.fileio.Amouti.*;
@@ -44,14 +45,19 @@ public class Main {
                 if(newFile == null){
                     break;
                 }
+                Charset encoding = enc.getEncoding(newFile);
+                if(encoding == null){
+                    continue;
+                }
+                
+                String content = frw.readFile(newFile, encoding);
+                if(content != null){
+                    String transformedContent =
+                            tr.wrapAndNumberLines(tr.capitalizeWords(tr.replaceChuck(content)));
 
-                String content = frw.readFile(newFile, enc.getEncoding(newFile));
-                String transformedContent =
-                        tr.wrapAndNumberLines(tr.capitalizeWords(tr.replaceChuck(content)));
-
-                frw.writeFile(new File(folder + "\\" + newFile.getName() + ".processed"),
-                        transformedContent, StandardCharsets.UTF_8);
-
+                    frw.writeFile(new File(folder + "\\" + newFile.getName() + ".processed"),
+                            transformedContent, StandardCharsets.UTF_8);
+                }
 
             } catch (Exception e) {
                 System.out.println("Exception: " + e);
