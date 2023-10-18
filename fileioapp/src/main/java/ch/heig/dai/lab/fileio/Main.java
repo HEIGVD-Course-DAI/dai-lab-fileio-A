@@ -49,13 +49,13 @@ public class Main {
                 if(encoding == null){
                     continue;
                 }
-                
+
                 String content = frw.readFile(newFile, encoding);
                 if(content != null){
                     String transformedContent =
                             tr.wrapAndNumberLines(tr.capitalizeWords(tr.replaceChuck(content)));
 
-                    frw.writeFile(new File(folder + "\\" + newFile.getName() + ".processed"),
+                    frw.writeFile(new File(newFile.getPath() + ".processed"),
                             transformedContent, StandardCharsets.UTF_8);
                 }
 
