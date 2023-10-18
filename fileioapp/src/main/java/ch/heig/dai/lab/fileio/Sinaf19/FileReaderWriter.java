@@ -24,22 +24,18 @@ public class FileReaderWriter {
                             encoding)
             );
 
-            while (reader.readLine() != null) {
-                content.append(reader.readLine()).append('\n');
+            String line;
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append('\n');
             }
-
+            content.deleteCharAt(content.length()-1);
             reader.close();
-
+            return content.toString();
         } catch (IOException e) {
             System.out.println("Exception: " + e);
             return null;
         }
 
-        if (content.isEmpty()) {
-            return null;
-        } else {
-            return content.toString();
-        }
     }
 
     /**
@@ -65,12 +61,12 @@ public class FileReaderWriter {
 
             writer.flush();
             writer.close();
-
+            return true;
         } catch (IOException e) {
             System.out.println("Exception: " + e);
             return false;
         }
 
-        return true;
+
     }
 }

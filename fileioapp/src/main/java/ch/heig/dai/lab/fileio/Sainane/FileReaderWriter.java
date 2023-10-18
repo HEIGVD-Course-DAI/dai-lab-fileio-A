@@ -23,9 +23,10 @@ public class FileReaderWriter {
             String line;
             while ((line = reader.readLine()) != null) {
                 builder.append(line);
-                builder.append('\n');
+                builder.append("\n");
             }
-            reader.close();
+
+            builder.deleteCharAt(builder.length()-1);
             return builder.toString();
         } catch (IOException e) {
             System.out.println("Exception: " + e);
@@ -52,7 +53,7 @@ public class FileReaderWriter {
                             new FileOutputStream(file),
                             encoding));
             writer.write(content);
-            writer.close();
+            writer.flush();
             return true;
         } catch (IOException e) {
             System.out.println("Exception: " + e);

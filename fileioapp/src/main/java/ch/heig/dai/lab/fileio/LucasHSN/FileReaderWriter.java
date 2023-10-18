@@ -7,20 +7,23 @@ public class FileReaderWriter {
 
     /**
      * Read the content of a file with a given encoding.
-     * @param file the file to read. 
+     * @param file the file to read.
      * @param encoding
      * @return the content of the file as a String, or null if an error occurred.
      */
     public String readFile(File file, Charset encoding) {
-        try (var reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding))) {
-            var content = new StringBuilder();
+        try (FileInputStream fis = new FileInputStream(file);
+             InputStreamReader isr = new InputStreamReader(fis, encoding);
+             BufferedReader reader = new BufferedReader(isr)) {
+
+            StringBuilder content = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
-                content.append(line).append("\n");
+                content.append(line).append(System.lineSeparator());
             }
-            reader.close();
             return content.toString();
         } catch (IOException e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -33,12 +36,14 @@ public class FileReaderWriter {
      * @return true if the file was written successfully, false otherwise
      */
     public boolean writeFile(File file, String content, Charset encoding) {
-        try (var writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), encoding))) {
+        try (FileOutputStream fos = new FileOutputStream(file);
+             OutputStreamWriter osw = new OutputStreamWriter(fos, encoding);
+             BufferedWriter writer = new BufferedWriter(osw)) {
+
             writer.write(content);
-            writer.flush();
-            writer.close();
             return true;
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }

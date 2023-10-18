@@ -16,7 +16,7 @@ public class FileReaderWriter {
         // Use the ...Stream and ...Reader classes from the java.io package.
         // Make sure to close the streams and readers at the end.
 
-        try(var is = new BufferedReader(new InputStreamReader(new FileInputStream(file.getName()), encoding))){
+        try(var is = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding))){
 
             var content = new StringBuilder();
             String line;
@@ -45,7 +45,7 @@ public class FileReaderWriter {
         // Make sure to flush the data and close the streams and readers at the end.
 
         try(var os = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), encoding))){
-            os.write(content);
+            os.write(content, 0, content.length());
             os.flush();
             os.close();
             return true;

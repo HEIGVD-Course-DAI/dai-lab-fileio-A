@@ -3,6 +3,7 @@ package ch.heig.dai.lab.fileio.Tasticoco;
 import java.io.*;
 import java.nio.charset.Charset;
 
+// #387
 public class FileReaderWriter {
 
     /**
@@ -15,7 +16,22 @@ public class FileReaderWriter {
         // TODO: Implement the method body here. 
         // Use the ...Stream and ...Reader classes from the java.io package.
         // Make sure to close the streams and readers at the end.
-        return null;
+        StringBuilder readString = new StringBuilder();
+        try {
+            var is = new BufferedReader(new InputStreamReader(new FileInputStream(file.getName()), encoding));
+
+            while(is.readLine() != null){
+                readString.append(is.readLine()).append("\n");
+            }
+
+            is.close();
+
+        }catch(IOException e){
+            System.out.println("IOException: " + e);
+            return null;
+        }
+
+        return readString.toString();
     }
 
     /**
@@ -29,6 +45,20 @@ public class FileReaderWriter {
         // TODO: Implement the method body here. 
         // Use the ...Stream and ...Reader classes from the java.io package.
         // Make sure to flush the data and close the streams and readers at the end.
-        return false;
+
+        try {
+            var os = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file.getName()), encoding));
+
+            os.write(content);
+
+            os.flush();
+            os.close();
+
+        }catch(IOException e){
+            System.out.println("IOException: " + e);
+            return false;
+        }
+
+        return true;
     }
 }
