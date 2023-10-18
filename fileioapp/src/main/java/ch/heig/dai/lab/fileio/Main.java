@@ -65,7 +65,7 @@ public class Main {
 
                 String content = fileReaderWriter.readFile(file, encoding);
                 if(content == null) {
-                    System.out.println("cannot read file");
+                    System.out.println("cannot read file ");
                     continue;
                 }
 
@@ -76,9 +76,9 @@ public class Main {
                 File result = new File(file + ".processed");
                 boolean hasWritten = fileReaderWriter.writeFile(result, content, encoding);
                 if(hasWritten){
-                    System.out.println(result.getName() + "file was not written");
+                    System.out.println(result.getName() + " file was not written");
                 } else {
-                    System.out.println(result.getName() + "file was written correctly");
+                    System.out.println(result.getName() + " file was written correctly");
                 }
 
 
