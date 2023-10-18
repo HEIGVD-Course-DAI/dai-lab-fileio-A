@@ -23,6 +23,8 @@ public class Transformer {
      * @return the transformed string
      */
     public String replaceChuck(String source) {
+        
+        //System.out.println("source: " + source);
         String transformedString = source.replace("Chuck Norris", newName);
         return transformedString;
     }
