@@ -22,7 +22,7 @@ public class FileReaderWriter {
                             new FileInputStream(file), encoding))){
                 String line;
                 while((line = r.readLine()) != null){
-                    content.concat(line);
+                    content += line + "\n";
                 }
 
         }catch (Exception e){
