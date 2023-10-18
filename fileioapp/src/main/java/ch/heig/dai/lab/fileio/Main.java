@@ -32,7 +32,6 @@ public class Main {
         String folder = args[0];
         int wordsPerLine = Integer.parseInt(args[1]);
         System.out.println("Application started, reading folder " + folder + "...");
-        // TODO: implement the main method here
 
         FileExplorer fileExp = new FileExplorer(folder);
         EncodingSelector encoding = new EncodingSelector();
@@ -41,7 +40,6 @@ public class Main {
 
         while (true) {
             try {
-                // TODO: loop over all files
 
                 File currentFile = fileExp.getNewFile();
 
