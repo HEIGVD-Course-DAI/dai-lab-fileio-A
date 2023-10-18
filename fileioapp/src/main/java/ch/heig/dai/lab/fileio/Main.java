@@ -1,45 +1,70 @@
 package ch.heig.dai.lab.fileio;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 
-// *** TODO: Change this to import your own package ***
-import ch.heig.dai.lab.fileio.jehrensb.*;
+import ch.heig.dai.lab.fileio.samuelroland.*;
 
 public class Main {
-    // *** TODO: Change this to your own name ***
-    private static final String newName = "Jean-Claude Van Damme";
+	private static final String newName = "Samuel Roland";
 
-    /**
-     * Main method to transform files in a folder.
-     * Create the necessary objects (FileExplorer, EncodingSelector, FileReaderWriter, Transformer).
-     * In an infinite loop, get a new file from the FileExplorer, determine its encoding with the EncodingSelector,
-     * read the file with the FileReaderWriter, transform the content with the Transformer, write the result with the
-     * FileReaderWriter.
-     * 
-     * Result files are written in the same folder as the input files, and encoded with UTF8.
-     *
-     * File name of the result file:
-     * an input file "myfile.utf16le" will be written as "myfile.utf16le.processed",
-     * i.e., with a suffixe ".processed".
-     */
-    public static void main(String[] args) {
-        // Read command line arguments
-        if (args.length != 2 || !new File(args[0]).isDirectory()) {
-            System.out.println("You need to provide two command line arguments: an existing folder and the number of words per line.");
-            System.exit(1);
-        }
-        String folder = args[0];
-        int wordsPerLine = Integer.parseInt(args[1]);
-        System.out.println("Application started, reading folder " + folder + "...");
-        // TODO: implement the main method here
+	/**
+	 * Main method to transform files in a folder.
+	 * Create the necessary objects (FileExplorer, EncodingSelector,
+	 * FileReaderWriter, Transformer).
+	 * In an infinite loop, get a new file from the FileExplorer, determine its
+	 * encoding with the EncodingSelector,
+	 * read the file with the FileReaderWriter, transform the content with the
+	 * Transformer, write the result with the
+	 * FileReaderWriter.
+	 * 
+	 * Result files are written in the same folder as the input files, and encoded
+	 * with UTF8.
+	 *
+	 * File name of the result file:
+	 * an input file "myfile.utf16le" will be written as "myfile.utf16le.processed",
+	 * i.e., with a suffixe ".processed".
+	 */
+	public static void main(String[] args) {
+		// Read command line arguments
+		if (args.length != 2 || !new File(args[0]).isDirectory()) {
+			System.out.println(
+					"You need to provide two command line arguments: an existing folder and the number of words per line.");
+			System.exit(1);
+		}
+		String folder = args[0];
+		int wordsPerLine = Integer.parseInt(args[1]);
+		System.out.println("Application started, reading folder " + folder + "...");
 
-        while (true) {
-            try {
-                // TODO: loop over all files
+		FileExplorer explorer = new FileExplorer(folder);
+		FileReaderWriter rw = new FileReaderWriter();
+		EncodingSelector encoding = new EncodingSelector();
+		Transformer transformer = new Transformer(newName, wordsPerLine);
+		final String PROCESSED_EXT = ".processed";
 
-            } catch (Exception e) {
-                System.out.println("Exception: " + e);
-            }
-        }
-    }
+		while (true) {
+			try {
+				File currentFile;
+				while ((currentFile = explorer.getNewFile()) != null) {
+					// Avoid processing already processed files
+					if (currentFile.getName().endsWith(PROCESSED_EXT))
+						continue;
+
+					// Read and transform the content
+					String content = rw.readFile(currentFile, encoding.getEncoding(currentFile));
+					content = transformer.replaceChuck(content);
+					content = transformer.capitalizeWords(content);
+					content = transformer.wrapAndNumberLines(content);
+
+					// Write the new processed file
+					rw.writeFile(new File(currentFile.getAbsolutePath() + PROCESSED_EXT), content,
+							StandardCharsets.UTF_8);
+				}
+
+				break; // No more files so we can stop it
+			} catch (Exception e) {
+				System.out.println("Exception: " + e);
+			}
+		}
+	}
 }
