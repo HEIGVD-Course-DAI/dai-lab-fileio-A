@@ -28,11 +28,8 @@ public class Transformer {
         // TODO: Implement the method body here.
         final String name = "Chuck Norris";
 
-        if (source.contains(name)) {
+
             return source.replaceAll(name, newName);
-        } else {
-            return "Ce texte ne contient pas le nom de Chuck N.";
-        }
 
     }
 
