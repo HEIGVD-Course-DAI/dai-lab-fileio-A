@@ -66,8 +66,7 @@ public class Main {
                 result = transformer.capitalizeWords(result);
                 result = transformer.wrapAndNumberLines(result);
 
-                String ResultName = file.getName() + ".processed";
-                File resultFile = new File(file.getParent() + ResultName);
+                File resultFile = new File(file.getPath() + ".processed");
 
                 fileReaderWriter.writeFile(resultFile,result, StandardCharsets.UTF_8);
 
