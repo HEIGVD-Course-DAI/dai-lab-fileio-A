@@ -2,6 +2,7 @@ package ch.heig.dai.lab.fileio;
 
 import java.io.File;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 // *** TODO: Change this to import your own package ***
 import ch.heig.dai.lab.fileio.CamilleKoestli.*;
@@ -57,7 +58,7 @@ public class Main {
 
                 File newFile = new File(currentFile + ".processed");
                 if (newFile.createNewFile()){
-                   fReaderWriter.writeFile(newFile, data, encoding);
+                   fReaderWriter.writeFile(newFile, data, StandardCharsets.UTF_8);
                 }
                 else{
                     System.out.println("Unable to write new file for: " + currentFile.getName());
