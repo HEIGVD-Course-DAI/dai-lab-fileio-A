@@ -31,6 +31,7 @@ public class Main {
      * an input file "myfile.utf16le" will be written as "myfile.utf16le.processed",
      * i.e., with a suffixe ".processed".
      */
+
     public static void main(String[] args) {
         // Read command line arguments
         if (args.length != 2 || !new File(args[0]).isDirectory()) {
@@ -65,11 +66,10 @@ public class Main {
                 result = transformer.capitalizeWords(result);
                 result = transformer.wrapAndNumberLines(result);
 
-                File resultFile = new File(file.getPath() + ".processed");
+                String ResultName = file.getName() + ".processed";
+                File resultFile = new File(file.getParent() + ResultName);
 
                 fileReaderWriter.writeFile(resultFile,result, StandardCharsets.UTF_8);
-
-
 
             } catch (Exception e) {
                 System.out.println("Exception: " + e);

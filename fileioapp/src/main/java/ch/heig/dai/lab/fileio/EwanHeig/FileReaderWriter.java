@@ -18,14 +18,15 @@ public class FileReaderWriter {
         try {
             var is = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding));
 
-            String line,resultat = null;
+            StringBuilder resultat = new StringBuilder();
+            String line;
 
             while((line = is.readLine()) != null){
-                resultat = (new StringBuilder()).append(resultat).toString();
+                resultat.append(line);
             }
 
             is.close();
-            return resultat;
+            return resultat.toString();
         } catch (IOException e) {
            return null;
         }
@@ -42,10 +43,9 @@ public class FileReaderWriter {
      */
     public boolean writeFile(File file, String content, Charset encoding) {
         // TODO: Implement the method body here.
-        try {
-            var os = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),encoding));
+        try(var os = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),encoding));){
 
-            os.write(content,0,content.length());
+            os.write(content);
             os.flush();
             os.close();
             return true;
