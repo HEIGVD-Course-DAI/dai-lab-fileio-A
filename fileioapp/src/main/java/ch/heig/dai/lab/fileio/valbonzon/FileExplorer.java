@@ -28,8 +28,10 @@ public class FileExplorer {
      * @return a new file, or null if there is no new file
      */
     public File getNewFile() {
-        
+        //for each file in the folder
         for(final File file : this.folder.listFiles()){
+
+            //If the file has not been returned 
             if(!knownFiles.contains(file)){
                 knownFiles.add(file);
                 return file;

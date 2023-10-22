@@ -23,13 +23,11 @@ public class EncodingSelector {
             return null;
         }
 
-        //Get only the text after the last dot.
-        Optional<String> extension = Optional.ofNullable(file.getName())
-        .filter(f -> f.contains("."))
-        .map(f -> f.substring(file.getName().lastIndexOf(".") + 1));
+        //Get only the text after the last dot
+        String extension = getExtension(file);
 
-        
-        switch(extension.get()){
+        //Compare the extension with encoding standards
+        switch(extension){
 
             case "utf8":
                 return StandardCharsets.UTF_8;
@@ -45,5 +43,12 @@ public class EncodingSelector {
         }
 
         
+    }
+    public String getExtension(File file){
+        Optional<String> extension = Optional.ofNullable(file.getName())
+        .filter(f -> f.contains("."))
+        .map(f -> f.substring(file.getName().lastIndexOf(".") + 1));
+        
+        return extension.get();
     }
 }
