@@ -23,13 +23,7 @@ public class Transformer {
      * @return the transformed string
      */
     public String replaceChuck(String source) {
-        try
-        {
-            return source.replaceAll("Chuck Norris", this.newName);
-        }catch(Exception e)
-        {
-            return "";
-        }
+        return source.replaceAll("Chuck Norris", this.newName);
     }
 
     /**
