@@ -1,13 +1,13 @@
 package ch.heig.dai.lab.fileio;
 
 import java.io.File;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
-// *** TODO: Change this to import your own package ***
-import ch.heig.dai.lab.fileio.jehrensb.*;
+import ch.heig.dai.lab.fileio.Sainane.*;
 
 public class Main {
-    // *** TODO: Change this to your own name ***
-    private static final String newName = "Jean-Claude Van Damme";
+    private static final String newName = "Sainane";
 
     /**
      * Main method to transform files in a folder.
@@ -31,11 +31,34 @@ public class Main {
         String folder = args[0];
         int wordsPerLine = Integer.parseInt(args[1]);
         System.out.println("Application started, reading folder " + folder + "...");
-        // TODO: implement the main method here
 
+        FileExplorer fileExplorer = new FileExplorer(folder);
+        EncodingSelector encodingSelector = new EncodingSelector();
+        FileReaderWriter fileReaderWriter = new FileReaderWriter();
+        Transformer transformer = new Transformer(newName, wordsPerLine);
+        File file;
+        Charset encoding;
         while (true) {
             try {
-                // TODO: loop over all files
+                    file = fileExplorer.getNewFile();
+                    if(file == null) {
+                        break;
+                    }
+                   encoding = encodingSelector.getEncoding(file);
+                    if(encoding == null) continue;
+
+
+                    String content = fileReaderWriter.readFile(file, encoding);
+                    if(content != null) {
+                        String transformedContent = transformer.replaceChuck(content);
+                        transformedContent = transformer.capitalizeWords(transformedContent);
+                        transformedContent = transformer.wrapAndNumberLines(transformedContent);
+
+                        File newFile = new File(file.getPath() + ".processed");
+                        fileReaderWriter.writeFile(newFile, transformedContent, StandardCharsets.UTF_8);
+                    }
+
+
 
             } catch (Exception e) {
                 System.out.println("Exception: " + e);
