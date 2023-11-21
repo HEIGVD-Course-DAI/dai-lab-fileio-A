@@ -18,18 +18,20 @@ public class FileReaderWriter {
         // Make sure to close the streams and readers at the end.
 
         //creation of a new BufferedReader to be able to read the file with the right encoding.
+        StringBuilder fileBuilder = new StringBuilder();
         try {
-            StringBuilder fileBuilder = new StringBuilder();
+
             String currentLine;
             var readingFile = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding));
             while ((currentLine = readingFile.readLine()) != null) {
-                    fileBuilder.append(readingFile).append('\n');
+                    fileBuilder.append(currentLine).append('\n');
             }
+
 
         } catch(IOException e) {
             return null;
         }
-        return null;
+        return fileBuilder.toString();
     }
 
     /**
@@ -48,10 +50,9 @@ public class FileReaderWriter {
             writerFile.write(content);
             writerFile.flush();
             writerFile.close();
-
         }catch(IOException e) {
             return false;
         }
-        return false;
+        return true;
     }
 }
